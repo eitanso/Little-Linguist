@@ -1,0 +1,33 @@
+<table mat-table [dataSource]="categories">
+    <!-- שורת כותרת טבלה -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>שם</th>
+      <td mat-cell *matCellDef="let category">{{ category.name }}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="words">
+      <th mat-header-cell *matHeaderCellDef>מילים</th>
+      <td mat-cell *matCellDef="let category">{{ category.words.join(', ') }}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="lastModified">
+      <th mat-header-cell *matHeaderCellDef>תאריך שינוי אחרון</th>
+      <td mat-cell *matCellDef="let category">{{ category.lastModified }}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>פעולות</th>
+      <td mat-cell *matCellDef="let category">
+        <!-- פה תוכל להוסיף כפתורים לעריכה ולמחיקה -->
+        <button mat-icon-button (click)="editCategory(category)">ערוך</button>
+        <button mat-icon-button (click)="deleteCategory(category)">מחק</button>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  <!-- כפתור להוספת קטגוריה חדשה (בשלב זה לא פעיל) -->
+  <button mat-button (click)="addCategory()">הוסף קטגוריה חדשה</button>
+  
