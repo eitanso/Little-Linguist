@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { CategoriesComponent } from './categories/categories.component';
-
+import { MatTableModule } from '@angular/material/table';
 
 export class YourModuleName { }
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet,HeaderComponent],
+  imports: [CommonModule, RouterOutlet,HeaderComponent,MatTableModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
