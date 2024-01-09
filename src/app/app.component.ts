@@ -9,7 +9,7 @@ export class YourModuleName { }
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet,HeaderComponent,MatTableModule],
+imports: [CommonModule, RouterOutlet,HeaderComponent,MatTableModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
