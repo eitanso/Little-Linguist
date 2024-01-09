@@ -1,0 +1,15 @@
+footer {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .help-icon-link {
+    font-size: 24px;
+    color: #007bff; 
+    text-decoration: none;
+    margin-right: 10px; 
+  }
+  
+  .help-icon-link:hover {
+    color: #0056b3; 
+  }
