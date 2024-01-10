@@ -1,5 +1,8 @@
 .toolbar-icon {
     padding-right: 8px;
+    position: absolute;
+    right: 10px;
+    
 }
 .example-spacer {
     flex: 1 1 auto;
@@ -10,10 +13,16 @@ header {
     color: white;
     padding: 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
   }
   
+  .app-name-container {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
   .app-name {
     font-size: 24px;
   }
@@ -36,3 +45,9 @@ header {
     text-decoration: none;
     color: white;
   }
+
+  .mat-icon-button {
+    color: white;
+    background-color: #cccc00 ;
+  }
+  
