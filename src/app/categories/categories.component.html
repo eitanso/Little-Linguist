@@ -1,32 +1,30 @@
-<table mat-table [dataSource]="categories">
-    <!-- שורת כותרת טבלה -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>שם</th>
-      <td mat-cell *matCellDef="let category">{{ category.name }}</td>
-    </ng-container>
-  
-    <ng-container matColumnDef="words">
-      <th mat-header-cell *matHeaderCellDef>מילים</th>
-      <td mat-cell *matCellDef="let category">{{ category.words.join(', ') }}</td>
-    </ng-container>
-  
-    <ng-container matColumnDef="lastModified">
-      <th mat-header-cell *matHeaderCellDef>תאריך שינוי אחרון</th>
-      <td mat-cell *matCellDef="let category">{{ category.lastModified }}</td>
-    </ng-container>
-  
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>פעולות</th>
-      <td mat-cell *matCellDef="let category">
-        <button mat-icon-button (click)="editCategory(category)">ערוך</button>
-        <button mat-icon-button (click)="deleteCategory(category)">מחק</button>
-      </td>
-    </ng-container>
-    
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  
-  <!-- כפתור להוספת קטגוריה חדשה (בשלב זה לא פעיל) -->
-  <button mat-button (click)="addCategory()">הוסף קטגוריה חדשה</button>
-  
+<mat-table [dataSource]="categories">
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>שם</mat-header-cell>
+    <mat-cell *matCellDef="let category">{{ category.name }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="words">
+    <mat-header-cell *matHeaderCellDef>מספר מילים</mat-header-cell>
+    <mat-cell *matCellDef="let category">{{ category.words }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="lastModified">
+    <mat-header-cell *matHeaderCellDef>תאריך שינוי אחרון</mat-header-cell>
+    <mat-cell *matCellDef="let category">{{ category.lastModified }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>פעולות</mat-header-cell>
+    <mat-cell *matCellDef="let category">
+      <button mat-icon-button (click)="editCategory(category)">ערוך</button>
+      <button mat-icon-button (click)="deleteCategory(category)">מחק</button>
+
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<button class="new-category-btn" mat-button color="basic">New Category</button>

@@ -14,9 +14,9 @@ throw new Error('Method not implemented.');
 }
 
   categories = [
-    { name: 'קטגוריה 1', words: ['מילה 1', 'מילה 2', 'מילה 3'], lastModified: 'תאריך 1' },
-    { name: 'קטגוריה 2', words: ['מילה 4', 'מילה 5', 'מילה 6'], lastModified: 'תאריך 2' },
-    { name: 'קטגוריה 3', words: ['מילה 7', 'מילה 8', 'מילה 9'], lastModified: 'תאריך 3' }
+    { name: 'חיות', words: 3, lastModified: '01/01/2024' },
+    { name: 'מספרים', words: 3, lastModified: '01/01/2024' },
+    { name: 'צבעים', words: 3, lastModified: '01/01/2024' }
   ];
   displayedColumns: string[] = ['name','words','lastModified','actions'];
 
