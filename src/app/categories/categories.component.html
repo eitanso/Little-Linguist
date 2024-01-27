@@ -1,3 +1,4 @@
+<div>
 <mat-table [dataSource]="categories">
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef>שם</mat-header-cell>
@@ -26,5 +27,7 @@
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
-
+</div>
+<div>
 <button class="new-category-btn" mat-button color="basic">New Category</button>
+</div>
