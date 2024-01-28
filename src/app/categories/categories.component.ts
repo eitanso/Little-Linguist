@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 
 @Component({
- imports: [MatTableModule],
+ imports: [MatTableModule, MatButtonModule],
  standalone: true, 
   selector: 'app-categories',
   templateUrl: './categories.component.html',
