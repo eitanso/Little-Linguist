@@ -1,17 +1,16 @@
-<mat-toolbar color="primary">
-  <button class="mat-icon-button" >
-    <mat-icon>menu</mat-icon>
-  </button>
-  <ng-template #menu let-name="name">
-<mat-menu>
-      <button mat-menu-item>Settings</button>
-      <button mat-menu-item>Log off {{ name }}</button>
+<div>
+  <mat-toolbar color="primary">
+    <button class="mat-icon-button" [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/admin">מצב ניהול</button>
+      <button mat-menu-item routerLink="/game">מצב משחק</button>
     </mat-menu>
-  </ng-template>
-  <div class="app-name-container">
-    <span class="app-name">Little Linguist</span>
-  </div>
-  <span class="example-spacer"></span>
-  <mat-icon class="toolbar-icon">person</mat-icon>
-</mat-toolbar>
-  
+    <div class="app-name-container">
+      <span class="app-name">Little Linguist</span>
+    </div>
+    <span class="example-spacer"></span>
+    <mat-icon class="toolbar-icon">person</mat-icon>
+  </mat-toolbar>
+</div>
