@@ -18,8 +18,9 @@
   <ng-container matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef>פעולות</mat-header-cell>
     <mat-cell *matCellDef="let category">
-      <button mat-icon-button (click)="editCategory(category)">ערוך</button>
-      <button mat-icon-button (click)="deleteCategory(category)">מחק</button>
+      <button mat-icon-button (click)="editCategory(category)"><mat-icon>edit</mat-icon></button>
+      <button mat-icon-button (click)="deleteCategory(category)">
+        <mat-icon>delete</mat-icon></button>
 
     </mat-cell>
   </ng-container>

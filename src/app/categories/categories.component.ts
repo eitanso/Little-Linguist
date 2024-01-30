@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 
 @Component({
- imports: [MatTableModule, MatButtonModule],
+ imports: [MatTableModule, MatButtonModule,MatIconModule],
  standalone: true, 
   selector: 'app-categories',
   templateUrl: './categories.component.html',
