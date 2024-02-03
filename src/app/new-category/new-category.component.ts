@@ -6,7 +6,7 @@ import {MatError, MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { Category } from '../shared/model/wordsCategory';
-import { Language } from '../shared/model/Languages-enum';
+import { Language } from '../shared/model/language';
 import { MatTableModule } from '@angular/material/table';
 import { MatIcon } from '@angular/material/icon';
 import { Router } from '@angular/router';
