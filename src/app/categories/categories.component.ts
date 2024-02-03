@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+
 
 @Component({
  imports: [MatTableModule, MatButtonModule,MatIconModule],
@@ -24,8 +27,10 @@ throw new Error('Method not implemented.');
 
 
   editCategory(category: any) {
-    
+    selector:'app-categories'
+    imports: ['MatFormFieldModule','MatInputModule' ]
   }
+  
   
   deleteCategory(category: any) {
     

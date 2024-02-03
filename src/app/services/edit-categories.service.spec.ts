@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-
 import { EditCategoriesService } from './edit-categories.service';
 
-describe('EditCategoriesService', () => {
+describe('EditCategoriesService',() => {
   let service: EditCategoriesService;
+
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

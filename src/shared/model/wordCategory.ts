@@ -6,3 +6,4 @@ interface WordCategory {
     targetLanguage: Language;
     wordPairs: Map<string, string>;
   }
+
