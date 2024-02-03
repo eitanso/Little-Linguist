@@ -1,4 +1,4 @@
-interface WordCategory {
+export interface WordCategory {
     name: string;
     id: number;
     lastModifiedDate: Date;
@@ -6,3 +6,4 @@ interface WordCategory {
     targetLanguage: Language;
     wordPairs: Map<string, string>;
   }
+
