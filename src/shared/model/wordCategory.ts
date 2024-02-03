@@ -1,4 +1,5 @@
-export interface WordCategory {
+export class WordCategory {
+  /*
     name: string;
     id: number;
     lastModifiedDate: Date;

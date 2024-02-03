@@ -2,18 +2,17 @@ import { Component, Input, OnInit, ViewChild, forwardRef } from '@angular/core';
 import { AbstractControl, FormsModule, NG_VALIDATORS, NgModelGroup, ValidationErrors, Validator, ValidatorFn } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
-import {MatError, MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { Category } from '../shared/model/wordsCategory';
-import { Language } from '../shared/model/language';
+import { WordCategory } from '../../shared/model/wordCategory';
 import { MatTableModule } from '@angular/material/table';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
-import{ categoryService} from "../services/categoryService";
+import{ categoryService } from '../services/categoryService.service';
 import { NgForm } from '@angular/forms'; 
 import { ReactiveFormsModule } from '@angular/forms';
-
+import {MatError} from '@angular/material/form-field';
 
 
 
@@ -21,8 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'new-category',
   standalone: true,
-  imports: [FormsModule,MatFormFieldModule,MatSelectModule,MatInputModule ,MatButtonModule,MatError,
-    CommonModule,MatIcon,MatTableModule,ReactiveFormsModule ],
+  imports: [FormsModule,MatFormFieldModule,MatSelectModule,MatInputModule,MatButtonModule,
+    CommonModule,MatIconModule,MatTableModule,ReactiveFormsModule, ],
   templateUrl: './new-category.component.html',
   styleUrl: './new-category.component.css',
   providers: [
@@ -35,10 +34,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 })
 
-
+@Component({
+  imports: [
+    MatInputModule,
+    MatFormFieldModule,
+    MatError
+  ],
+})
 
 export class CategoryFormComponent implements OnInit, Validator    {
-  currentCategory:Category = new Category(0,"",Language.English,Language.Hebrew,[]);
+  currentCategory:WordCategory = new WordCategory(0,"",Language.English,Language.Hebrew,[]);
   @ViewChild('wordsGroup') wordsGroup? : NgModelGroup;
 
 
@@ -66,7 +71,7 @@ export class CategoryFormComponent implements OnInit, Validator    {
   }
 
   validateWords(_form: NgForm) {
-    const wordsArray = this.currentCategory.Words;
+    const wordsArray = this.currentCategory.wordPairs;
   
     if (!wordsArray || wordsArray.length === 0) {
       this.wordsGroup?.control.setErrors({ 'noWords': true });
@@ -112,12 +117,12 @@ export class CategoryFormComponent implements OnInit, Validator    {
 
 
   addNewWord() {
-    this.currentCategory.Words.push({ sourceWord: '', targetWord: '' });
+    this.currentCategory.wordPairs.push({ sourceWord: '', targetWord: '' });
   }
 
 
   deleteNewWord(index: number) {
-    this.currentCategory.Words.splice(index, 1);
+    this.currentCategory.wordPairs.splice(index, 1);
     this.wordsGroup?.control.markAsDirty();
 
   }

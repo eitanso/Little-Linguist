@@ -1,4 +1,4 @@
-import { Category } from "../shared/model/wordsCategory";
+import { WordCategory } from "../../shared/model/wordCategory";
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -7,26 +7,26 @@ import { Injectable } from '@angular/core';
 
 
 export class categoryService {
-    categories = new Map<number, Category>();
+    categories = new Map<number, WordCategory>();
     nextId= 1;
 
     constructor() { }
-    list() : Category[] {
+    list() : WordCategory[] {
         return Array.from(this.categories.values());
       }
 
-      get(id : number) : Category | undefined {
+      get(id : number) : WordCategory | undefined {
         console.log('Fetching category with ID:', id);
         return this.categories.get(id);
       }
     
-      add(newCategoryData:Category) {
+      add(newCategoryData:WordCategory) {
         newCategoryData.id = this.nextId
         this.categories.set(this.nextId, newCategoryData);
         this.nextId++;
       }
     
-      update(existingCategory : Category) : void {
+      update(existingCategory : WordCategory) : void {
         if (this.categories.has(existingCategory.id)) {
           this.categories.set(existingCategory.id, existingCategory);
         }
