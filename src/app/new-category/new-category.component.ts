@@ -10,7 +10,7 @@ import { Language } from '../shared/model/language';
 import { MatTableModule } from '@angular/material/table';
 import { MatIcon } from '@angular/material/icon';
 import { Router } from '@angular/router';
-import{ categoryService} from "../services/categories";
+import{ categoryService} from "../services/categoryService";
 import { NgForm } from '@angular/forms'; 
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -65,7 +65,7 @@ export class CategoryFormComponent implements OnInit, Validator    {
     return this.atLeastOneWordPair()(control);
   }
 
-  validateWords(form: NgForm) {
+  validateWords(_form: NgForm) {
     const wordsArray = this.currentCategory.Words;
   
     if (!wordsArray || wordsArray.length === 0) {
