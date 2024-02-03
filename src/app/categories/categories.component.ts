@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
  imports: [MatTableModule, MatButtonModule,MatIconModule],
@@ -11,6 +12,7 @@ import { MatTableModule } from '@angular/material/table';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent {
+[x: string]: any;
 addCategory() {
 throw new Error('Method not implemented.');
 }
@@ -30,4 +32,9 @@ throw new Error('Method not implemented.');
   deleteCategory(category: any) {
     
   }
+  constructor(private router: Router) { }
+  navigateToNewCategory() {
+    this.router.navigate(['/new-category']);
+  
+
 }
