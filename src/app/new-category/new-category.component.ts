@@ -10,7 +10,7 @@ import { Language } from '../shared/model/language';
 import { MatTableModule } from '@angular/material/table';
 import { MatIcon } from '@angular/material/icon';
 import { Router } from '@angular/router';
-import{ categoryService} from "./../services/categoryService";
+import{ categoryService} from "../services/categories";
 import { NgForm } from '@angular/forms'; 
 import { ReactiveFormsModule } from '@angular/forms';
 
