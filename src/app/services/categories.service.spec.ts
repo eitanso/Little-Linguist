@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { EditCategoriesService } from './edit-categories.service';
+import { EditCategoriesService } from './categories.service';
 
 describe('EditCategoriesService',() => {
   let service: EditCategoriesService;

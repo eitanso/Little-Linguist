@@ -14,6 +14,21 @@ export class EditCategoriesService {
     }
   }
 } 
+export class DeleteCategoriesService{
+  Category: any;
+  delete(id: number): void {
+   this.Category.delete(id);
+ }
+}
+add(NewCategory : Category) {
+  let newId = this.nextId;
+  Category.id = newId;
+  this.categories.set(newId, Category);
+  ++ this.nextId;
+ }
+categories = new Map<number, Category>();
+nextId= 0;
+
 /*
  
   list(): Category[] {
