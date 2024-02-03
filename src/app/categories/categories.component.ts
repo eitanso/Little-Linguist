@@ -2,9 +2,13 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+<<<<<<< HEAD
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 
+=======
+import { Router } from '@angular/router';
+>>>>>>> 5453b6c9f5fc033c4fc66c2cba2c8bc694fdfa0d
 
 @Component({
  imports: [MatTableModule, MatButtonModule,MatIconModule],
@@ -14,6 +18,7 @@ import {MatInputModule} from '@angular/material/input';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent {
+[x: string]: any;
 addCategory() {
 throw new Error('Method not implemented.');
 }
@@ -35,4 +40,9 @@ throw new Error('Method not implemented.');
   deleteCategory(category: any) {
     
   }
+  constructor(private router: Router) { }
+  navigateToNewCategory() {
+    this.router.navigate(['/new-category']);
+  
+
 }
