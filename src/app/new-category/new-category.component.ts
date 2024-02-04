@@ -5,7 +5,7 @@ import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { WordCategory } from '../../shared/model/wordCategory';
+import { Category } from '../../shared/model/wordCategory';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
@@ -43,12 +43,14 @@ import {MatError} from '@angular/material/form-field';
 })
 
 export class CategoryFormComponent implements OnInit, Validator    {
-  currentCategory:WordCategory = new WordCategory(0,"",Language.English,Language.Hebrew,[]);
+  currentCategory:Category = new Category(0,"",this.currentDate,Language.English,Language.Hebrew,[]);
   @ViewChild('wordsGroup') wordsGroup? : NgModelGroup;
 
 
   @Input()
   id? : string;
+  
+  
 
   constructor(private  categoryService:  categoryService, private router: Router) {}
 

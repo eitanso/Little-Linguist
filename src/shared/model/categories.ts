@@ -3,8 +3,9 @@ export class Category {
   static lastModifiedDate(lastModifiedDate: any, lastModifiedDate1: Category) {
     throw new Error('Method not implemented.');
   }
-    constructor( public name: string,
+    constructor(
       public id: number,
+      public name: string,
       public LastModifiedDate: Date, 
       public sourceLanguage: Language,
       public targetLanguage: Language){

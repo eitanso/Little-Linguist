@@ -1,10 +1,38 @@
-export class WordCategory {
-  /*
-    name: string;
-    id: number;
-    lastModifiedDate: Date;
-    sourceLanguage: Language;
-    targetLanguage: Language;
-    wordPairs: Map<string, string>;
+import { TranslatedWord } from './data/TranslatedWord';
+import { Language } from './language';
+
+
+export class Category {
+  lastModificationDate!: Date;
+  Words: TranslatedWord[]=[];
+
+  constructor( public id: number,
+    public categoryName: string,
+    public sourceLanguage: Language,
+    public targetLanguage: Language,
+    words: TranslatedWord[] = [] 
+
+   
+  ) {
+    this.Words = words;
+
+   
   }
 
+
+  fullName() : string{
+    return this.categoryName
+
+  }
+
+  public calculateNumberOfWords(category: Category): number {
+    return category.Words.length;
+  }
+
+  getDateAsString() : string {
+    const today = new Date();
+    return today.toLocaleDateString();
+  }
+}
+
+    
