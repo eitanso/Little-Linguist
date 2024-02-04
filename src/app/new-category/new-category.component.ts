@@ -75,7 +75,7 @@ export class CategoryFormComponent implements OnInit, Validator    {
   }
 
   validateWords(_form: NgForm) {
-    const wordsArray = this.currentCategory.TranslatedWord;
+    const wordsArray = this.currentCategory['TranslatedWord'];
   
     if (!wordsArray || wordsArray.length === 0) {
       this.wordsGroup?.control.setErrors({ 'noWords': true });
