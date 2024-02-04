@@ -1,3 +1,5 @@
+import { Language } from "./language";
+
 export class Category {
   static id: number;
   static lastModifiedDate(lastModifiedDate: any, lastModifiedDate1: Category) {

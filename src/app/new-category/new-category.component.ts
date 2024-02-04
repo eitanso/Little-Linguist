@@ -44,15 +44,12 @@ import { Language } from '../../shared/model/language';
 })
 
 export class CategoryFormComponent implements OnInit, Validator    {
-  
+  currentCategory:Category = new Category(0,"",Language.English,Language.Hebrew,[]);
+  @ViewChild('wordsGroup') wordsGroup? : NgModelGroup;
+
 
   @Input()
   id? : string;
-  currentDate!: Date;
-  
-  currentCategory:Category = new Category(0,"",this.currentDate,Language.English,Language.Hebrew,[]);
-  @ViewChild('wordsGroup') wordsGroup? : NgModelGroup;
-
 
   constructor(private  categoryService:  categoryService, private router: Router) {}
 
@@ -74,8 +71,8 @@ export class CategoryFormComponent implements OnInit, Validator    {
     return this.atLeastOneWordPair()(control);
   }
 
-  validateWords(_form: NgForm) {
-    const wordsArray = this.currentCategory['TranslatedWord'];
+  validateWords(form: NgForm) {
+    const wordsArray = this.currentCategory.Words;
   
     if (!wordsArray || wordsArray.length === 0) {
       this.wordsGroup?.control.setErrors({ 'noWords': true });
@@ -121,12 +118,12 @@ export class CategoryFormComponent implements OnInit, Validator    {
 
 
   addNewWord() {
-    this.currentCategory.wordPairs.push({ sourceWord: '', targetWord: '' });
+    this.currentCategory.Words.push({ sourceWord: '', targetWord: '' });
   }
 
 
   deleteNewWord(index: number) {
-    this.currentCategory.wordPairs.splice(index, 1);
+    this.currentCategory.Words.splice(index, 1);
     this.wordsGroup?.control.markAsDirty();
 
   }
