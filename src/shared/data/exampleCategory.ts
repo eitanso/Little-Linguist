@@ -1,6 +1,6 @@
 
 import { Language } from "../../shared/model/language";
-import { Category } from "../wordsCategory";
+import { Category } from "../../shared/model/wordCategory";
 import { TranslatedWord } from "./TranslatedWord";
 
 
