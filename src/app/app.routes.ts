@@ -6,5 +6,5 @@ export const routes: Routes = [{
     path: '',
     component: CategoriesComponent,
 },
-{ path: 'new-category', component: CategoriesComponent }];
+{ path: 'new-category', component: CategoryFormComponent }];
 
