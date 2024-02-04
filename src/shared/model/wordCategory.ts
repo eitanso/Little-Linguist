@@ -1,5 +1,5 @@
-import { TranslatedWord } from './data/TranslatedWord';
-import { Language } from './language';
+import { TranslatedWord } from '../../data/TranslatedWord';
+import { Language } from '../../shared/model/wordCategory';
 
 
 export class Category {
