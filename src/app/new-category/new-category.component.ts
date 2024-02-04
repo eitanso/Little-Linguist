@@ -13,6 +13,7 @@ import{ categoryService } from '../services/categoryService.service';
 import { NgForm } from '@angular/forms'; 
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatError} from '@angular/material/form-field';
+import { Language } from '../../shared/model/language';
 
 
 
@@ -43,14 +44,15 @@ import {MatError} from '@angular/material/form-field';
 })
 
 export class CategoryFormComponent implements OnInit, Validator    {
-  currentCategory:Category = new Category(0,"",this.currentDate,Language.English,Language.Hebrew,[]);
-  @ViewChild('wordsGroup') wordsGroup? : NgModelGroup;
-
+  
 
   @Input()
   id? : string;
+  currentDate!: Date;
   
-  
+  currentCategory:Category = new Category(0,"",this.currentDate,Language.English,Language.Hebrew,[]);
+  @ViewChild('wordsGroup') wordsGroup? : NgModelGroup;
+
 
   constructor(private  categoryService:  categoryService, private router: Router) {}
 

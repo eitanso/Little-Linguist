@@ -3,11 +3,13 @@ import { Language } from './language';
 
 
 export class Category {
+  [x: string]: any;
   lastModificationDate!: Date;
   Words: TranslatedWord[]=[];
 
   constructor( public id: number,
     public categoryName: string,
+    public currentDate: Date,
     public sourceLanguage: Language,
     public targetLanguage: Language,
     words: TranslatedWord[] = [] 
