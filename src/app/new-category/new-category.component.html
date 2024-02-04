@@ -1,24 +1,24 @@
 <form #demoForm="ngForm" (ngSubmit)="onSubmitRegistration(demoForm)" novalidate>
     <div class="form-group">
-      <mat-label class="custom-label">Category name:</mat-label>
+      <mat-label class="custom-label">שם מחלקה:</mat-label>
       <mat-form-field appearance="outline">
         <input class="mat-input-element" matInput [(ngModel)]="currentCategory.categoryName" name="categoryName" required
                #categoryNameField="ngModel" >
         <mat-error *ngIf="categoryNameField.invalid && categoryNameField.touched">
-          Required field
+          שדה חובה
         </mat-error>
       </mat-form-field>
     </div>
     
     <div class="form-group">
-      <mat-label class="custom-label">Source language:</mat-label>
+      <mat-label class="custom-label">:שפת מקור</mat-label>
       <mat-form-field appearance="outline">
         <input matInput [(ngModel)]="currentCategory.sourceLanguage" name="sourceLanguage" readonly>
       </mat-form-field>
     </div>
   
     <div class="form-group">
-      <mat-label class="custom-label">Target language:</mat-label>
+      <mat-label class="custom-label">:שפת יעד</mat-label>
       <mat-form-field appearance="outline">
         <input matInput [(ngModel)]="currentCategory.targetLanguage" name="targetLanguage" readonly>
       </mat-form-field>
@@ -26,7 +26,7 @@
   
     <div ngModelGroup="words"  #wordsGroup="ngModelGroup" [ngClass]="{ 'no-words-error': wordsGroup?.control?.hasError('noWords') }">
       <div class="words">
-        <h2>Words</h2>
+        <h2>מילים</h2>
         <button mat-fab class="add-button"  type="button" (click)="addNewWord()">
           <mat-icon>add</mat-icon>
         </button>
@@ -34,18 +34,18 @@
   
       <div *ngFor="let word of currentCategory.Words; index as i" class="new-word-form">
         <mat-form-field appearance="outline">
-          <mat-label>English word:</mat-label>
+          <mat-label>:מילה באנגלית</mat-label>
           <input class="new-word-row input" matInput [(ngModel)]="word.sourceWord" name="sourceWord_{{i}}" required pattern="^[a-zA-Z]+$" #EnglishwordField="ngModel">
           <mat-error *ngIf="EnglishwordField.invalid">
-            Required field - use English letters only
+            !שדה חובה- נדרש לכתוב באנגלית בלבד
           </mat-error>
         </mat-form-field>
     
         <mat-form-field appearance="outline">
-          <mat-label>Hebrew word:</mat-label>
+          <mat-label>:מילה בעברית</mat-label>
           <input class="new-word-row input" matInput [(ngModel)]="word.targetWord" name="targetWord_{{i}}" required pattern="^[א-ת]+$" #HebrewwordField="ngModel">
           <mat-error *ngIf="HebrewwordField.invalid">
-            Required field - use Hebrew letters only
+            !שדה חובה- נדרש לכתוב בעברית בלבד
           </mat-error>
         </mat-form-field>
   
@@ -57,13 +57,13 @@
     
     <div>
       <mat-error *ngIf="wordsGroup?.control?.hasError('noWords')">
-      At least one word pair is required
+      נדרש לפחות זוג אחד של מילים
     </mat-error>
   </div>
   
     <div>
       <button type="submit" mat-raised-button color="primary" [disabled]="demoForm.invalid || demoForm.pristine || wordsGroup?.control?.hasError('noWords')">
-        Save
+       <mat-icon>save</mat-icon>
       </button>
     </div>
   </form>
