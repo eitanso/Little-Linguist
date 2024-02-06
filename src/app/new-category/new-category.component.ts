@@ -1,18 +1,14 @@
 import { Component, Input, OnInit, ViewChild, forwardRef } from '@angular/core';
 import { AbstractControl, FormsModule, NG_VALIDATORS, NgModelGroup, ValidationErrors, Validator, ValidatorFn } from '@angular/forms';
-import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { Category } from '../../shared/model/wordCategory';
-import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import{ categoryService } from '../services/categoryService.service';
 import { NgForm } from '@angular/forms'; 
-import { ReactiveFormsModule } from '@angular/forms';
-import {MatError} from '@angular/material/form-field';
 import { Language } from '../../shared/model/language';
 
 
@@ -21,8 +17,8 @@ import { Language } from '../../shared/model/language';
 @Component({
   selector: 'new-category',
   standalone: true,
-  imports: [FormsModule,MatFormFieldModule,MatSelectModule,MatInputModule,MatButtonModule,
-    CommonModule,MatIconModule,MatTableModule,ReactiveFormsModule, ],
+  imports: [FormsModule,MatFormFieldModule,MatInputModule,MatButtonModule,
+    CommonModule,MatIconModule, ],
   templateUrl: './new-category.component.html',
   styleUrl: './new-category.component.css',
   providers: [
@@ -35,13 +31,7 @@ import { Language } from '../../shared/model/language';
 
 })
 
-@Component({
-  imports: [
-    MatInputModule,
-    MatFormFieldModule,
-    MatError
-  ],
-})
+
 
 export class CategoryFormComponent implements OnInit, Validator    {
   currentCategory:Category = new Category(0,"",Language.English,Language.Hebrew,[]);
