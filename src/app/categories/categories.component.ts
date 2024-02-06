@@ -11,7 +11,7 @@ import { Language } from '../../shared/model/language';
 import { MatTableModule } from '@angular/material/table';
 import { MatIcon } from '@angular/material/icon';
 import { Router } from '@angular/router';
-import{ categoryService} from "./services/categoryService";
+import { categoryService } from '../../app/services/categoryService.service';
 import { NgForm } from '@angular/forms'; 
 
 
