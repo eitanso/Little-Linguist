@@ -14,7 +14,7 @@ export class YourModuleName { }
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [CommonModule, RouterOutlet, HeaderComponent, FooterComponent,]
+    imports: [CommonModule, RouterOutlet, HeaderComponent, FooterComponent]
 })
 export class AppComponent {
   title = 'Little Linguist';
