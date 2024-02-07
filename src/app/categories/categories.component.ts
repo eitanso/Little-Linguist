@@ -22,7 +22,7 @@ import { CdkTableDataSourceInput } from '@angular/cdk/table';
   selector: 'app-categories',
   standalone: true,
   imports: [FormsModule,MatSelectModule ,MatButtonModule,
-    CommonModule,MatTableModule,RouterModule  ],
+    CommonModule,MatTableModule,RouterModule ,MatIconModule ],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css',
   providers: [
