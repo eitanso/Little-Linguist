@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, ViewChild, forwardRef } from '@angular/core';
 import { AbstractControl, FormsModule, NG_VALIDATORS, NgModelGroup, ValidationErrors, Validator, ValidatorFn } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
-import {MatError, MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
@@ -22,8 +21,8 @@ import { CdkTableDataSourceInput } from '@angular/cdk/table';
 @Component({
   selector: 'app-categories',
   standalone: true,
-  imports: [FormsModule,MatFormFieldModule,MatSelectModule ,MatButtonModule,
-    CommonModule,MatTableModule,MatIconModule,RouterModule  ],
+  imports: [FormsModule,MatSelectModule ,MatButtonModule,
+    CommonModule,MatTableModule,RouterModule  ],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css',
   providers: [
