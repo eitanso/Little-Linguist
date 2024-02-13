@@ -15,7 +15,7 @@ export class Category {
    
   ) {
     this.Words = words;
-
+    this.lastModificationDate =new Date();
    
   }
 
@@ -30,9 +30,10 @@ export class Category {
   }
 
   getDateAsString() : string {
-    const today = new Date();
-    return today.toLocaleDateString();
+    
+    return this.lastModificationDate.toLocaleDateString();
   }
+  
 }
 
 

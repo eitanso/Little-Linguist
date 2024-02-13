@@ -8,7 +8,7 @@
 
     <ng-container class="colum" matColumnDef="numberOfWords">
       <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Number of Words">מספר מילים</th>
-      <td mat-cell *matCellDef="let category">{{ category.numberOfWords}}</td>
+      <td mat-cell *matCellDef="let category">{{ category.Words.length}}</td>
     </ng-container>
 
     <ng-container class="colum" matColumnDef="lastModificationDate">
