@@ -8,12 +8,12 @@
 
     <ng-container class="colum" matColumnDef="numberOfWords">
       <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Number of Words">מספר מילים</th>
-      <td mat-cell *matCellDef="let category">{{ calculateNumberOfWords(category)}}</td>
+      <td mat-cell *matCellDef="let category">{{ category.numberOfWords}}</td>
     </ng-container>
 
     <ng-container class="colum" matColumnDef="lastModificationDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Last Modified">תאריך שינוי אחרון</th>
-      <td mat-cell *matCellDef="let category">{{ getDateAsString() }}</td>
+      <td mat-cell *matCellDef="let category">{{category.lastModificationDate }}</td>
     </ng-container>
 
     <ng-container class="colum" matColumnDef="action">

@@ -16,7 +16,10 @@ export class CategoriesComponent {
 sortData() {
 throw new Error('Method not implemented.');
 }
-  dataSource: CdkTableDataSourceInput<any> = [];
+  dataSource: CdkTableDataSourceInput<any> = [
+  { categoryName: 'חיות', numberOfWords: 3, lastModificationDate: '01/01/2024' },
+  { categoryName: 'מספרים', numberOfWords: 3, lastModificationDate: '01/01/2024' },
+  { categoryName: 'צבעים', numberOfWords: 3, lastModificationDate: '01/01/2024' }];
 calculateNumberOfWords(_t23: any) {
 throw new Error('Method not implemented.');
 }
