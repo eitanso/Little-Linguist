@@ -19,10 +19,10 @@
     <ng-container class="colum" matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>פעולות</th>
       <td mat-cell *matCellDef="let category">
-        <button mat-icon-button [routerLink]="['/editcategory', category.id]">
+        <button mat-icon-button >
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button (click)="deleteCategory(category.id, category.fullName())">
+        <button mat-icon-button >
           <mat-icon>delete</mat-icon>
         </button>
       </td>
@@ -34,6 +34,6 @@
 <div>
   <button class="new-category-btn" mat-button color="basic" routerLink='/new-categoryform'
   mat-button 
-  routerLink="/new-category">>New Category</button>
+  routerLink="/new-category">New Category</button>
 
 </div>
