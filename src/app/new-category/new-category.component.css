@@ -1,3 +1,5 @@
-new-category {
-    text-align: center;
+:host {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
 }
