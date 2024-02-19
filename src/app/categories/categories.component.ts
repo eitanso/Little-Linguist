@@ -3,10 +3,11 @@ import { LocalStorageService } from './../services/local-storage.service';
 import { Category, Language } from '../../shared/model/wordCategory';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import {  RouterModule } from '@angular/router';
 
 
 @Component({
-  imports: [MatTableModule, MatIconModule ],
+  imports: [MatTableModule, MatIconModule ,RouterModule ],
   standalone: true,
   selector: 'app-categories',
   templateUrl: './categories.component.html',
