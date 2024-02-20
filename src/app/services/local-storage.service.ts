@@ -5,36 +5,43 @@ import { Category } from '../../shared/model/wordCategory';
   providedIn: 'root'
 })
 export class LocalStorageService {
-  categories= new Map<number, Category>();
-  nextId= 1;
+  private storageKey = 'categories'; 
 
-  constructor() { }
-
-  list() : Category[] {
-    return Array.from(this.categories.values());
-   }
-
-   get(id : number) : Category | undefined {
-    return this.categories.get(id);
-   }
-
-   add(newCategoryData:Category) {
-    newCategoryData.id = this.nextId
-    this.categories.set(this.nextId, newCategoryData);
-    this.nextId++;
+  constructor() {
+    if (!localStorage.getItem(this.storageKey)) {
+      localStorage.setItem(this.storageKey, JSON.stringify({})); 
     }
-    
-    update(existingCategories: Category) : void{
-      if(this.categories.has(existingCategories.id)) {
-        this.categories.set(existingCategories.id, existingCategories);
-      }
+  }
+
+  list(): Category[] {
+    const categoriesObj = JSON.parse(localStorage.getItem(this.storageKey) || '{}');
+    return Object.values(categoriesObj);
+  }
+
+  get(id: number): Category | undefined {
+    const categoriesObj = JSON.parse(localStorage.getItem(this.storageKey) || '{}');
+    return categoriesObj[id];
+  }
+
+  add(newCategoryData: Category): void {
+    const categoriesObj = JSON.parse(localStorage.getItem(this.storageKey) || '{}');
+    const nextId = Object.keys(categoriesObj).length + 1; 
+    newCategoryData.id = nextId;
+    categoriesObj[nextId] = newCategoryData;
+    localStorage.setItem(this.storageKey, JSON.stringify(categoriesObj));
+  }
+
+  update(existingCategory: Category): void {
+    if (existingCategory.id) {
+      const categoriesObj = JSON.parse(localStorage.getItem(this.storageKey) || '{}');
+      categoriesObj[existingCategory.id] = existingCategory;
+      localStorage.setItem(this.storageKey, JSON.stringify(categoriesObj));
     }
+  }
 
-    delete(existingCategoriesId : number) : void {
-      if (this.categories.has(existingCategoriesId)){
-        this.categories.delete(existingCategoriesId);
-      }
-    }
-   }
-
-
+  delete(categoryId: number): void {
+    const categoriesObj = JSON.parse(localStorage.getItem(this.storageKey) || '{}');
+    delete categoriesObj[categoryId];
+    localStorage.setItem(this.storageKey, JSON.stringify(categoriesObj));
+  }
+}
