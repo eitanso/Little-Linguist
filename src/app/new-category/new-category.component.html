@@ -2,7 +2,7 @@
     <div class="form-group">
       <mat-label class="custom-label">שם מחלקה:</mat-label>
       <mat-form-field appearance="outline">
-        <input class="mat-input-element" matInput [(ngModel)]="currentCategory.categoryName" name="categoryName" required
+        <input class="mat-input-element" matInput [(ngModel)]="category.categoryName" name="categoryName" required
                #categoryNameField="ngModel" >
         <mat-error *ngIf="categoryNameField.invalid && categoryNameField.touched">
           שדה חובה
@@ -13,14 +13,14 @@
     <div class="form-group">
       <mat-label class="custom-label">:שפת מקור</mat-label>
       <mat-form-field appearance="outline">
-        <input matInput [(ngModel)]="currentCategory.sourceLanguage" name="sourceLanguage" readonly>
+        <input matInput [(ngModel)]="category.sourceLanguage" name="sourceLanguage" readonly>
       </mat-form-field>
     </div>
   
     <div class="form-group">
       <mat-label class="custom-label">:שפת יעד</mat-label>
       <mat-form-field appearance="outline">
-        <input matInput [(ngModel)]="currentCategory.targetLanguage" name="targetLanguage" readonly>
+        <input matInput [(ngModel)]="category.targetLanguage" name="targetLanguage" readonly>
       </mat-form-field>
     </div>
   
@@ -32,7 +32,7 @@
         </button>
       </div>
   
-      <div *ngFor="let word of currentCategory.Words; index as i" class="new-word-form">
+      <div *ngFor="let word of category.Words; index as i" class="new-word-form">
         <mat-form-field appearance="outline">
           <mat-label>:מילה באנגלית</mat-label>
           <input class="new-word-row input" matInput [(ngModel)]="word.sourceWord" name="sourceWord_{{i}}" required pattern="^[a-zA-Z]+$" #EnglishwordField="ngModel">

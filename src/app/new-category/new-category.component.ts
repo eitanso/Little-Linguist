@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormsModule, NgModelGroup, ValidationErrors, Validator, ValidatorFn } from '@angular/forms';
+import { FormsModule, NgModelGroup, NgForm, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
-import { Category } from '../../shared/model/wordCategory';
 import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { Category } from '../../shared/model/wordCategory';
 import { Language } from '../../shared/model/language';
 
 @Component({
@@ -16,53 +15,64 @@ import { Language } from '../../shared/model/language';
   templateUrl: './new-category.component.html',
   styleUrls: ['./new-category.component.css'],
 })
-export class CategoryFormComponent implements OnInit, Validator {
-  currentCategory: Category = new Category(0, "", Language.English, Language.Hebrew, []);
+export class CategoryFormComponent implements OnInit {
+  category: Category;
   @ViewChild('wordsGroup') wordsGroup?: NgModelGroup;
 
-  constructor(private router: Router) {}
-
-  ngOnInit(): void {
-    this.loadCategoryFromLocalStorage();
+  constructor(private router: Router) {
+    
+    this.category = new Category(this.getNewCategoryId(), "", Language.English, Language.Hebrew, []);
   }
 
-  loadCategoryFromLocalStorage(): void {
-    const savedCategory = localStorage.getItem('currentCategory');
-    if (savedCategory) {
-      this.currentCategory = JSON.parse(savedCategory);
-    }
+  ngOnInit(): void {
+  
+  }
+
+  getNewCategoryId(): number {
+    const lastId = parseInt(localStorage.getItem('lastCategoryId') || '0');
+    return lastId + 1;
   }
 
   saveCategoryToLocalStorage(): void {
-    localStorage.setItem('currentCategory', JSON.stringify(this.currentCategory));
+    if (this.category && this.category.categoryName) {
+      const newId = this.getNewCategoryId();
+      this.category.id = newId; 
+      localStorage.setItem(`category-${newId}`, JSON.stringify(this.category));
+      localStorage.setItem('lastCategoryId', newId.toString());
+    }
   }
+
+
 
   validate(control: AbstractControl): ValidationErrors | null {
-    return this.atLeastOneWordPair()(control);
-  }
+  
+    const isValid = this.atLeastOneWordPair()(control);
+    return isValid ? null : { 'invalidCategory': true };
+}
 
-  atLeastOneWordPair(): ValidatorFn {
+atLeastOneWordPair(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const words = this.currentCategory.Words;
-      if (!words || words.length === 0 || words.some(word => !word.sourceWord || !word.targetWord)) {
-        return { 'noWords': true };
-      }
-      return null;
+        
+        const words = (control.value as Category).Words || [];
+        if (!words.length || words.some(word => !word.sourceWord || !word.targetWord)) {
+            return { 'noWords': true };
+        }
+        return null; 
     };
-  }
+}
 
   onSubmitRegistration(form: NgForm) {
     if (form.valid) {
       this.saveCategoryToLocalStorage();
-      this.router.navigate(['/']);
+      this.router.navigate(['/']); 
     }
   }
 
   addNewWord() {
-    this.currentCategory.Words.push({ sourceWord: '', targetWord: '' });
+    this.category.Words.push({ sourceWord: '', targetWord: '' });
   }
 
   deleteNewWord(index: number) {
-    this.currentCategory.Words.splice(index, 1);
+    this.category.Words.splice(index, 1);
   }
 }
