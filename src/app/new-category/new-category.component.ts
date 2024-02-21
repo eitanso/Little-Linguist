@@ -61,12 +61,24 @@ atLeastOneWordPair(): ValidatorFn {
     };
 }
 
-  onSubmitRegistration(form: NgForm) {
-    if (form.valid) {
-      this.saveCategoryToLocalStorage();
-      this.router.navigate(['/']); 
-    }
+onSubmitRegistration(form: NgForm) {
+  if (form.valid) {
+    const existingCategories = JSON.parse(localStorage.getItem('categories') || '[]');
+    const categoryExists = existingCategories.some((cat: Category) => cat.categoryName === this.category.categoryName);
+
+    if (!categoryExists) {
+      const newId = this.getNewCategoryId();
+      this.category.id = newId;
+      existingCategories.push(this.category);
+      
+      localStorage.setItem('categories', JSON.stringify(existingCategories));
+      localStorage.setItem('lastCategoryId', newId.toString());
+
+      this.router.navigate(['/']);
+    } 
   }
+}
+
 
   addNewWord() {
     this.category.Words.push({ sourceWord: '', targetWord: '' });
