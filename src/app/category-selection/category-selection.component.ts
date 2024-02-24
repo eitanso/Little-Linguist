@@ -2,24 +2,35 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from '../../shared/model/wordCategory';
 import { LocalStorageService } from '../services/local-storage.service';
 import {  RouterModule , Router} from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-category-selection',
   standalone: true,
-  imports: [RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './category-selection.component.html',
   styleUrls: ['./category-selection.component.css']
 })
 export class CategorySelectionComponent implements OnInit {
-  categories: Category[] = [];
+  dataSource: Category[] = [];
+  
 
-  constructor(private localStorageService: LocalStorageService) { }
+  constructor(private localStorageService: LocalStorageService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadCategories();
+    
   }
 
-  loadCategories(): void {
-    this.categories = this.localStorageService.list();
+  loadCategories() {
+    const categories = this.localStorageService.list();
+    if (categories) {
+      const validCategories = categories.filter(categories => categories !== null);
+      this.dataSource = validCategories;
+    }
+  }
+
+  goToGame(categoryId: number): void {
+    this.router.navigate(['/game', categoryId]);
   }
 }
