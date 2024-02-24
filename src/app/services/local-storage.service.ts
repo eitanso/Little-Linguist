@@ -34,25 +34,38 @@ export class LocalStorageService {
   update(existingCategory: Category): void {
     if (existingCategory.id) {
       const categoriesObj = JSON.parse(localStorage.getItem(this.storageKey) || '{}');
-      categoriesObj[existingCategory.id] = existingCategory;
-      localStorage.setItem(this.storageKey, JSON.stringify(categoriesObj));
+      if (categoriesObj[existingCategory.id]) {
+        categoriesObj[existingCategory.id] = existingCategory;
+        localStorage.setItem(this.storageKey, JSON.stringify(categoriesObj));
+      } else {
+        console.error(`Category with id ${existingCategory.id} does not exist.`);
+      }
+    } else {
+      console.error('Category id is missing.');
     }
   }
 
   delete(categoryId: number): void {
     const categoriesObj = JSON.parse(localStorage.getItem(this.storageKey) || '{}');
-    delete categoriesObj[categoryId];
-    localStorage.setItem(this.storageKey, JSON.stringify(categoriesObj));
+    if (categoriesObj[categoryId]) {
+      delete categoriesObj[categoryId];
+      localStorage.setItem(this.storageKey, JSON.stringify(categoriesObj));
+    } else {
+      console.error(`Category with id ${categoryId} does not exist.`);
+    }
   }
   
   getWordCountInCategory(categoryId: number): number {
     const category = this.get(categoryId);
     return category ? category.Words.length : 0;
   }
+  
   getCategoryById(id: number): Category | undefined {
     const categories = this.list();
     const category = categories.find(category => category.id === id);
-    return category ? category : undefined;
-}
-
+    if (!category) {
+      console.error(`Category with id ${id} does not exist.`);
+    }
+    return category;
+  }
 }
