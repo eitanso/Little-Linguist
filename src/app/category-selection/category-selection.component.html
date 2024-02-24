@@ -1,6 +1,9 @@
-<h2>בחירת קטגוריה למשחק</h2>
-<ul>
-  <li *ngFor="let category of categories" (click)="startGame(category.id)">
-    {{ category.categoryName }}
-  </li>
-</ul>
+<div>
+    <h2>קטגוריות</h2>
+    <ul>
+      <li *ngFor="let category of categories">
+        <a [routerLink]="['/game', category.id]">{{ category.categoryName }}</a>
+      </li>
+    </ul>
+  </div>
+  
