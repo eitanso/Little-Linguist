@@ -1,0 +1,6 @@
+<h2>בחירת קטגוריה למשחק</h2>
+<ul>
+  <li *ngFor="let category of categories" (click)="startGame(category.id)">
+    {{ category.categoryName }}
+  </li>
+</ul>
