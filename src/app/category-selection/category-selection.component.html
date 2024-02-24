@@ -2,7 +2,9 @@
     <h2>קטגוריות</h2>
     <ul>
       <li *ngFor="let category of categories">
-        <a [routerLink]="['/game', category.id]">{{ category.categoryName }}</a>
+        <ng-container *ngIf="category">
+          <a [routerLink]="['/game', category.id]">{{ category.categoryName }}</a>
+        </ng-container>
       </li>
     </ul>
   </div>

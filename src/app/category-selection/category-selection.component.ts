@@ -12,7 +12,10 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./category-selection.component.css']
 })
 export class CategorySelectionComponent implements OnInit {
-  dataSource: Category[] = [];
+  categories: Category[] = [];
+
+
+  displayedColumns: string[] = ['categoryName']
   
 
   constructor(private localStorageService: LocalStorageService, private router: Router) { }
@@ -26,7 +29,7 @@ export class CategorySelectionComponent implements OnInit {
     const categories = this.localStorageService.list();
     if (categories) {
       const validCategories = categories.filter(categories => categories !== null);
-      this.dataSource = validCategories;
+      this.categories = validCategories;
     }
   }
 
