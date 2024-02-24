@@ -44,4 +44,9 @@ export class LocalStorageService {
     delete categoriesObj[categoryId];
     localStorage.setItem(this.storageKey, JSON.stringify(categoriesObj));
   }
+  getWordCountInCategory(categoryId: number): number {
+    const category = this.get(categoryId);
+    return category ? category.Words.length : 0;
+  }
+
 }

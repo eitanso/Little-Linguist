@@ -63,7 +63,12 @@ atLeastOneWordPair(): ValidatorFn {
 
 onSubmitRegistration(form: NgForm) {
   if (form.valid) {
-    const existingCategories = JSON.parse(localStorage.getItem('categories') || '[]');
+    let existingCategories = JSON.parse(localStorage.getItem('categories') || '[]');
+
+    if (!Array.isArray(existingCategories)) {
+      existingCategories = [];
+    }
+
     const categoryExists = existingCategories.some((cat: Category) => cat.categoryName === this.category.categoryName);
 
     if (!categoryExists) {

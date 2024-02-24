@@ -4,7 +4,8 @@ import { Category, Language } from '../../shared/model/wordCategory';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import {  RouterModule } from '@angular/router';
-
+import { MatDialog } from '@angular/material/dialog';
+import { DelCategoryComponent } from '../del-category/del-category.component';
 
 @Component({
   imports: [MatTableModule, MatIconModule ,RouterModule ],
@@ -14,20 +15,23 @@ import {  RouterModule } from '@angular/router';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
-  [x: string]: any;
   dataSource: Category[] = [];
   displayedColumns: string[] = ['categoryName', 'numberOfWords', 'lastModificationDate', 'action'];
 
-  constructor(private localStorageService: LocalStorageService) {}
+  constructor(private localStorageService: LocalStorageService, private dialogService: MatDialog) {}
 
   ngOnInit() {
     this.loadCategories();
   }
 
   loadCategories() {
-    this.dataSource = this.localStorageService.list();
+    const categories = this.localStorageService.list();
+    if (categories) {
+      const validCategories = categories.filter(category => category !== null);
+      this.dataSource = validCategories;
+    }
   }
-
+  
   addCategory(newCategoryData: Category) {
     this.localStorageService.add(newCategoryData);
     this.loadCategories(); 
@@ -39,11 +43,21 @@ export class CategoriesComponent implements OnInit {
   }
 
   deleteCategory(categoryId: number) {
-    this.localStorageService.delete(categoryId);
-    this.loadCategories(); 
+    const categoryToDelete = this.dataSource.find(category => category.id === categoryId);
+    if (categoryToDelete) {
+      const dialogRef = this.dialogService.open(DelCategoryComponent, { data: categoryId });
+      dialogRef.afterClosed().subscribe(deletionResult => {
+        if (deletionResult) {
+          this.localStorageService.delete(categoryId);
+          this.loadCategories();
+        }
+      });
+    } else {
+      console.error('Category not found in dataSource. Cannot delete.');
+    }
   }
-  
-  
+
+  getWordCount(categoryId: number): number {
+    return this.localStorageService.getWordCountInCategory(categoryId);
+  }
 }
-
-
