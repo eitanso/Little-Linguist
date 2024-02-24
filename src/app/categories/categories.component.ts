@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LocalStorageService } from './../services/local-storage.service'; 
 import { Category, Language } from '../../shared/model/wordCategory';
 import { MatTableModule } from '@angular/material/table';
@@ -8,7 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DelCategoryComponent } from '../del-category/del-category.component';
 
 @Component({
-  imports: [MatTableModule, MatIconModule ,RouterModule ],
+  imports: [MatTableModule, MatIconModule, RouterModule],
   standalone: true,
   selector: 'app-categories',
   templateUrl: './categories.component.html',
@@ -18,7 +19,7 @@ export class CategoriesComponent implements OnInit {
   dataSource: Category[] = [];
   displayedColumns: string[] = ['categoryName', 'numberOfWords', 'lastModificationDate', 'action'];
 
-  constructor(private localStorageService: LocalStorageService, private dialogService: MatDialog) {}
+  constructor(private localStorageService: LocalStorageService, private router: Router, private dialogService: MatDialog) {}
 
   ngOnInit() {
     this.loadCategories();
@@ -31,7 +32,7 @@ export class CategoriesComponent implements OnInit {
       this.dataSource = validCategories;
     }
   }
-  
+
   addCategory(newCategoryData: Category) {
     this.localStorageService.add(newCategoryData);
     this.loadCategories(); 
@@ -39,7 +40,7 @@ export class CategoriesComponent implements OnInit {
 
   editCategory(updatedCategory: Category) {
     this.localStorageService.update(updatedCategory);
-    this.loadCategories(); 
+    this.router.navigate(['editcategory', updatedCategory.id]);
   }
 
   deleteCategory(categoryId: number) {

@@ -4,9 +4,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Category } from '../../shared/model/wordCategory';
 import { Language } from '../../shared/model/language';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Component({
   selector: 'new-category',
@@ -18,14 +19,22 @@ import { Language } from '../../shared/model/language';
 export class CategoryFormComponent implements OnInit {
   category: Category;
   @ViewChild('wordsGroup') wordsGroup?: NgModelGroup;
+  id: any;
 
-  constructor(private router: Router) {
-    
+  constructor(private router: Router, private route: ActivatedRoute, private localStorageService: LocalStorageService) {
     this.category = new Category(this.getNewCategoryId(), "", Language.English, Language.Hebrew, []);
   }
 
   ngOnInit(): void {
-  
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+      if (this.id) {
+        let categoryFromService = this.localStorageService.get(parseInt(this.id));
+        if (categoryFromService) {
+          this.category = categoryFromService;
+        }
+      }
+    });
   }
 
   getNewCategoryId(): number {
@@ -37,53 +46,55 @@ export class CategoryFormComponent implements OnInit {
     if (this.category && this.category.categoryName) {
       const newId = this.getNewCategoryId();
       this.category.id = newId; 
-      localStorage.setItem(`category-${newId}`, JSON.stringify(this.category));
+      this.localStorageService.add(this.category);
       localStorage.setItem('lastCategoryId', newId.toString());
     }
   }
-
-
 
   validate(control: AbstractControl): ValidationErrors | null {
-  
     const isValid = this.atLeastOneWordPair()(control);
     return isValid ? null : { 'invalidCategory': true };
-}
-
-atLeastOneWordPair(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-        
-        const words = (control.value as Category).Words || [];
-        if (!words.length || words.some(word => !word.sourceWord || !word.targetWord)) {
-            return { 'noWords': true };
-        }
-        return null; 
-    };
-}
-
-onSubmitRegistration(form: NgForm) {
-  if (form.valid) {
-    let existingCategories = JSON.parse(localStorage.getItem('categories') || '[]');
-
-    if (!Array.isArray(existingCategories)) {
-      existingCategories = [];
-    }
-
-    const categoryExists = existingCategories.some((cat: Category) => cat.categoryName === this.category.categoryName);
-
-    if (!categoryExists) {
-      const newId = this.getNewCategoryId();
-      this.category.id = newId;
-      existingCategories.push(this.category);
-      
-      localStorage.setItem('categories', JSON.stringify(existingCategories));
-      localStorage.setItem('lastCategoryId', newId.toString());
-
-      this.router.navigate(['/']);
-    } 
   }
-}
 
+  atLeastOneWordPair(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const words = (control.value as Category).Words || [];
+      if (!words.length || words.some(word => !word.sourceWord || !word.targetWord)) {
+          return { 'noWords': true };
+      }
+      return null; 
+    };
+  }
+
+  onSubmitRegistration(form: NgForm) {
+    if (form.valid) {
+      const words = this.category.Words || [];
+      const hasWordPair = words.length > 0 && words.every(word => word.sourceWord && word.targetWord);
+
+      if (hasWordPair) {
+        let existingCategories = this.localStorageService.list();
+
+        const categoryExists = existingCategories.some((cat: Category) => cat && cat.categoryName === this.category.categoryName);
+
+        if (!categoryExists) {
+          const newId = this.getNewCategoryId();
+          this.category.id = newId;
+          this.localStorageService.add(this.category);
+          localStorage.setItem('lastCategoryId', newId.toString());
+
+          this.router.navigate(['/']);
+        }else{
+          this.localStorageService.update(this.category);
+          this.category.lastModificationDate = new Date();
+          this.localStorageService.update(this.category);
+          this.router.navigate(['/']);
+
+        }
+      } else {
+        alert('חייב להזין לפחות צמד מילים אחד');
+      }
+    }
+  }
 
   addNewWord() {
     this.category.Words.push({ sourceWord: '', targetWord: '' });
@@ -91,5 +102,10 @@ onSubmitRegistration(form: NgForm) {
 
   deleteNewWord(index: number) {
     this.category.Words.splice(index, 1);
+  }
+
+  updateCategory() {
+    this.localStorageService.update(this.category);
+    this.router.navigate(['/']);
   }
 }

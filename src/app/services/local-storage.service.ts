@@ -44,9 +44,15 @@ export class LocalStorageService {
     delete categoriesObj[categoryId];
     localStorage.setItem(this.storageKey, JSON.stringify(categoriesObj));
   }
+  
   getWordCountInCategory(categoryId: number): number {
     const category = this.get(categoryId);
     return category ? category.Words.length : 0;
   }
+  getCategoryById(id: number): Category | undefined {
+    const categories = this.list();
+    const category = categories.find(category => category.id === id);
+    return category ? category : undefined;
+}
 
 }
