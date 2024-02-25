@@ -28,37 +28,22 @@ export class TranslationGameComponent implements OnInit {
   loadCategory(categoryId: number): void {
     const categoriesString = localStorage.getItem('categories');
     if (categoriesString) {
-        try {
-            const categories: Category[] = JSON.parse(categoriesString);
-            if (Array.isArray(categories)) {
-                const category = categories.find(c => c.id === categoryId);
-                if (category) {
-                    this.category = category;
-                    this.words = this.category.Words.map(word => ({ source: word.sourceWord, target: '' }));
-                    return; // Exit early if category is found
-                } else {
-                    console.error('Category with id', categoryId, 'not found in localStorage');
-                    // Handle the case when the category is not found
-                }
-            } else {
-                console.error('Categories data in localStorage is not an array');
-                // Handle the case when categories data is not an array
-            }
-        } catch (error) {
-            console.error('Error parsing categories data from localStorage:', error);
-            // Handle the case when an error occurs during parsing
+      try {
+        const categories: { [key: string]: Category } = JSON.parse(categoriesString);
+        const category = categories[categoryId.toString()];
+        if (category) {
+          this.category = category;
+          this.words = this.category.Words.map(word => ({ source: word.sourceWord, target: '' }));
+        } else {
+          console.error(`Category with id ${categoryId} not found in localStorage`);
         }
+      } catch (error) {
+        console.error('Error parsing categories data from localStorage:', error);
+      }
     } else {
-        console.error('Categories data not found in localStorage');
-        // Handle the case when categories data is not found
+      console.error('No categories found in localStorage');
     }
-
-    // Clear category and words if not found or error occurred
-    this.category = undefined;
-    this.words = [];
-}
-
-
+  }
 
   checkTranslations(): void {
     if (!this.category) {
