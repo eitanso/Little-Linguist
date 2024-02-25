@@ -7,9 +7,10 @@
     </ng-container>
 
     <ng-container matColumnDef="numberOfWords">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>מספר מילים</th>
-      <td mat-cell *matCellDef="let category">{{ category.words?.length || 0 }}</td>
+      <th mat-header-cell *matHeaderCellDef> Number of Words </th>
+      <td mat-cell *matCellDef="let category"> {{ getWordCount(category.id) }} </td>
     </ng-container>
+    
 
     <ng-container matColumnDef="lastModificationDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>תאריך שינוי אחרון</th>

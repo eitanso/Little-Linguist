@@ -3,11 +3,12 @@ import { Category } from '../../shared/model/wordCategory';
 import { LocalStorageService } from '../services/local-storage.service';
 import {  RouterModule , Router} from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-category-selection',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule ],
   templateUrl: './category-selection.component.html',
   styleUrls: ['./category-selection.component.css']
 })

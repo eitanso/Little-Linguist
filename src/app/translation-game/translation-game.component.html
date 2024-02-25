@@ -1,9 +1,16 @@
-<h2>משחק תרגום</h2>
+<div calss="center" >
+<h2>משחק תרגום - {{ category?.categoryName }}</h2>
 <div *ngFor="let word of words; let i = index">
-  <span>{{ word.source }}</span>
-  <input type="text" [(ngModel)]="word.target" placeholder="הזן תרגום" />
-  <span *ngIf="correctTranslations[i] === true" style="color: green">&#10004;</span>
-  <span *ngIf="correctTranslations[i] === false" style="color: red">&#10006;</span>
+  <div>
+    <span>Origin: {{ word.source }}</span>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span>Target:</span>
+    
+    <input type="text" [(ngModel)]="word.target" placeholder="הזן תרגום" />
+    <span *ngIf="correctTranslations[i] === true" style="color: green;">✔️</span>
+    <span *ngIf="correctTranslations[i] === false" style="color: red;">❌</span>
+  </div>
 </div>
 <button (click)="checkTranslations()">בדוק תרגומים</button>
 <button (click)="revealCorrectTranslations()">חשוף תרגומים נכונים</button>
+</div>

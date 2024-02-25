@@ -1,0 +1,53 @@
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .word-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: center; 
+  }
+  
+  .word-origin {
+    margin-right: 10px;
+  }
+  
+  .word-target {
+    display: flex;
+    align-items: center;
+  }
+  
+  .word-target label {
+    margin-right: 5px;
+  }
+  
+  .word-status {
+    margin-left: 10px;
+  }
+  
+  .correct {
+    color: green;
+  }
+  
+  .incorrect {
+    color: red;
+  }
+  
+  .buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center; 
+  }
+  
+  button {
+    margin-right: 10px;
+  }
+  .center {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+  }
