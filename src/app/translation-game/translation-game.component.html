@@ -15,3 +15,4 @@
 <button (click)="checkTranslations()">בדוק תרגומים</button>
 <button (click)="revealCorrectTranslations()">חשוף תרגומים נכונים</button>
 </div>
+<div *ngIf="feedbackMessage" style="margin-top: 20px;">{{ feedbackMessage }}</div>

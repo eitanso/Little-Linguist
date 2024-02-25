@@ -15,6 +15,8 @@ export class TranslationGameComponent implements OnInit {
   category: Category | undefined;
   words: { source: string, target: string }[] = [];
   correctTranslations: boolean[] = [];
+  feedbackMessage: string = '';
+
 
   constructor(private route: ActivatedRoute) { }
 
@@ -50,8 +52,15 @@ export class TranslationGameComponent implements OnInit {
       console.error('No category loaded.');
       return;
     }
-    this.correctTranslations = this.words.map((word, index) => 
-      word.target === this.category?.Words[index]?.targetWord);
+    let correctCount = 0;
+    this.correctTranslations = this.words.map((word, index) => {
+      const isCorrect = word.target === this.category?.Words[index]?.targetWord;
+      if (isCorrect) correctCount++;
+      return isCorrect;
+    });
+    
+    
+    this.feedbackMessage = `תרגמת ${correctCount} מתוך ${this.words.length} בצורה נכונה.`;
   }
 
   revealCorrectTranslations(): void {
